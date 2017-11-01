@@ -133,7 +133,7 @@ class LiqPay
         }
 
         $params    = $this->cnb_params($params);
-        $data      = base64_encode(json_encode($params));
+        $data      = $this->cnb_data($params);
         $signature = $this->cnb_signature($params);
         
         return sprintf('
@@ -149,12 +149,6 @@ class LiqPay
             $language
         );
     }
-
-
-
-
-
-
 
     /**
      * cnb_signature
@@ -174,7 +168,15 @@ class LiqPay
         return $signature;
     }
 
-
+    /**
+     * cnb_data
+     * @param $params
+     * @return string
+     */
+    public function cnb_data($params)
+    {
+        return base64_encode( json_encode($params) );
+    }
 
 
     /**
